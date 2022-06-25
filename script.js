@@ -1,16 +1,31 @@
 window.onload = function () {
   // Get the modal
-  var modal = document.getElementById("myModal");
+  const modal = document.getElementById("myModal");
 
   // Get the button that opens the modal
-  var btn = document.getElementById("myBtn");
+  const btn = document.getElementById("submitBtn");
 
   // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
+  const span = document.getElementsByClassName("close")[0];
+  const form = document.getElementById("form");
+  const print = document.getElementById("printBtn");
+  const confirm = document.getElementById("confirmBtn");
+  const reset = document.getElementById("resetBtn");
+
   // When the user clicks on the button, open the modal
   btn.onclick = function (event) {
     event.preventDefault();
-    modal.style.display = "block";
+    modal.style.display = "flex";
+  };
+  confirm.onclick = function (event) {
+    form.submit();
+  };
+  print.onclick = function (event) {
+    event.preventDefault();
+  };
+  reset.onclick = (event) => {
+    event.preventDefault();
+    form.reset();
   };
 
   // When the user clicks on <span> (x), close the modal
@@ -21,9 +36,7 @@ window.onload = function () {
   window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = "none";
+      document.getElementById("form").reset();
     }
   };
-  document.getElementById("btnSend").addEventListner("click", function (event) {
-    document.getElementById("form").submit();
-  });
 };
