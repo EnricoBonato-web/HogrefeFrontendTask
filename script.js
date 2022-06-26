@@ -73,13 +73,15 @@ window.onload = function () {
     for (var pair of formData.entries()) {
       var li = document.createElement("li");
       li.setAttribute("class", "result");
-      li.appendChild(document.createTextNode(pair[0] + ":  " + pair[1]));
+      li.appendChild(
+        document.createTextNode(pair[0] + ":    value " + pair[1])
+      );
       ul.appendChild(li);
       total += +pair[1];
     }
     var li = document.createElement("li");
     li.setAttribute("class", "total");
-    li.appendChild(document.createTextNode("total" + ":  " + total));
+    li.appendChild(document.createTextNode("total" + ": " + total));
     ul.appendChild(li);
   };
   confirm.onclick = function (event) {
@@ -87,6 +89,36 @@ window.onload = function () {
   };
   print.onclick = function (event) {
     event.preventDefault();
+    const formData = new FormData(document.querySelector("form"));
+    let total = 0;
+    let array = [];
+
+    for (var pair of formData.entries()) {
+      array.push([pair[0], pair[1]]);
+      total += +pair[1];
+    }
+    array.push(["total", total]);
+    var csv = "";
+    for (let row of array) {
+      for (let col of row) {
+        csv += col + ",";
+      }
+      csv += "\r\n";
+    }
+    var myBlob = new Blob([csv], { type: "text/csv" });
+    var url = window.URL.createObjectURL(myBlob);
+    var anchor = document.createElement("a");
+    anchor.href = url;
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0");
+    var yyyy = today.getFullYear();
+    today = yyyy + "-" + mm + "-" + dd;
+    anchor.download = "results" + today + ".csv";
+
+    anchor.click();
+    window.URL.revokeObjectURL(url);
+    anchor.remove();
   };
   reset.onclick = (event) => {
     event.preventDefault();
