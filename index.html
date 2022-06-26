@@ -8,15 +8,20 @@
     <link rel="stylesheet" href="./style.css" />
     <script src="./script.js"></script>
   </head>
+
   <body>
+    <!-- Title -->
     <h1>Hogrefe Frontend task</h1>
     <div class="survey">
+      <!-- Survey Form -->
       <form id="form">
         <div id="question1">
+          <!-- Question -->
           <p class="question">
             When I plan something, I leave nothing to chance.
           </p>
-          <ul class="likert">
+          <!-- Radio Buttons -->
+          <ul class="answer">
             <li>
               <input type="radio" name="question1" value="1" />
               <label>completely untrue </label>
@@ -41,7 +46,7 @@
         </div>
         <div id="question2">
           <p class="question">I don’t like being the center of attention.</p>
-          <ul class="likert">
+          <ul class="answer">
             <li>
               <input type="radio" name="question2" value="1" />
               <label>completely untrue </label>
@@ -69,7 +74,7 @@
             It is not compatible with my working style to constantly have to
             consult others.
           </p>
-          <ul class="likert">
+          <ul class="answer">
             <li>
               <input type="radio" name="question3" value="1" />
               <label>completely untrue </label>
@@ -94,7 +99,7 @@
         </div>
         <div id="question4">
           <p class="question">Others know me as a very straight talker.</p>
-          <ul class="likert">
+          <ul class="answer">
             <li>
               <input type="radio" name="question4" value="1" />
               <label>completely untrue </label>
@@ -121,7 +126,7 @@
           <p class="question">
             I stay motivated even if the rewards seem a long way off.
           </p>
-          <ul class="likert">
+          <ul class="answer">
             <li>
               <input type="radio" name="question5" value="1" />
               <label>completely untrue </label>
@@ -144,6 +149,12 @@
             </li>
           </ul>
         </div>
+        <!-- Buttons -->
+        <button id="submitBtn" class="form__button" value="Submit">
+          Submit
+        </button>
+        <button id="resetBtn" class="form__button left">Reset</button>
+        <!-- Confirm Modal -->
         <div id="myModal" class="modal">
           <div class="modal-content">
             <span class="close">&times;</span>
@@ -169,16 +180,14 @@
             </button>
           </div>
         </div>
+        <!-- Error Modal -->
+
         <div id="myModalError" class="modal">
           <div class="modal-content">
             <span class="close closeError">&times;</span>
-            <p>Please compleate all the questions..</p>
+            <p>Please complete all the questions..</p>
           </div>
         </div>
-        <button id="submitBtn" class="form__button" value="Submit">
-          Submit
-        </button>
-        <button id="resetBtn" class="form__button left">Reset</button>
       </form>
     </div>
   </body>
