@@ -46,7 +46,7 @@ const addChange = () => {
 /*      Remove all error */
 const removeError = () => {
   for (let i = 1; i <= 5; i++) {
-    var radios = document.getElementById(QUESTION + i).classList.remove(ERROR);
+    document.getElementById(QUESTION + i).classList.remove(ERROR);
   }
 };
 /*   */
@@ -91,7 +91,7 @@ window.onload = function () {
 
   /*        Confirm      */
   confirm.onclick = function (event) {
-    //handling 
+    //handling
     form.submit();
   };
 
@@ -145,8 +145,8 @@ window.onload = function () {
     modalError.style.display = "none";
   };
   window.onclick = function (event) {
-    if (event.target == modal) modal.style.display = "none";
-    if (event.target == modalError) modalError.style.display = "none";
+    if (event.target === modal) modal.style.display = "none";
+    if (event.target === modalError) modalError.style.display = "none";
   };
   addChange();
 };

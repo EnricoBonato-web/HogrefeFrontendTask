@@ -1,8 +1,6 @@
 type QuestionItem = {
     id: string;
-    name:string;
-    price:number;
-    description?:string;
+    text:string
   };
   export default QuestionItem;
   

@@ -1,7 +1,7 @@
 import Header from "./components/Layout/Header";
 import React, { Fragment, useState } from "react";
-import Questions from "./components/Questions/Questions";
 import Cart from "./components/Cart/Cart";
+import AvailableQuestions from "./components/Questions/AvailableQuestions";
 function App() {
   console.clear();
   const [cartIsShown, setCartIsShown] = useState(false);
@@ -14,10 +14,9 @@ function App() {
   return (
     <Fragment>
       {cartIsShown && <Cart onClose={hideCartHandler} />}
-      <Header onShowCart={showCartHandler} />
-      <main>
-        <Questions />
-      </main>
+      <Header />
+
+      <AvailableQuestions onShowCart={showCartHandler} />
     </Fragment>
   );
 }

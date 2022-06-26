@@ -3,31 +3,41 @@ import QuestionItems from "./QuestionItem/QuestionItem";
 import Card from "../UI/Card";
 import QuestionItem from "../../types/QuestionItem";
 import classes from "./AvailableQuestions.module.css";
+import HeaderCartButton from "../Layout/HeaderCartButton";
 
-const AvailableQuestions = () => {
+const AvailableQuestions = (props: { onShowCart: () => {} }) => {
   const [questions, setQuestions] = useState<QuestionItem[]>([]);
+  const [answers, setAnswers] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [httpError, setHttpError] = useState();
-
+  const changeHandler = (event: any, questionNumber: number, value: number) => {
+    console.log(event.target.value);
+    setAnswers((prevState) => {
+      const newAnswer = [...prevState];
+      newAnswer[questionNumber] = value;
+      return newAnswer;
+    });
+  };
   useEffect(() => {
     const fetchedQuestions = async () => {
       setIsLoading(true);
       const response = await fetch(process.env.REACT_APP_FireBaseQuestions!);
       if (!response.ok) {
-        throw new Error("Something went very very wrong");
+        throw new Error("Something went wrong");
       }
       const responseData = await response.json();
       const loadedQuestions: QuestionItem[] = [];
+      const loadedAnswers: number[] = [];
 
       for (const key in responseData) {
         loadedQuestions.push({
           id: key,
-          name: responseData[key].name,
-          description: responseData[key].description,
-          price: responseData[key].price,
+          text: responseData[key],
         });
+        loadedAnswers.push(0);
       }
       setQuestions(loadedQuestions);
+      setAnswers(loadedAnswers);
       setIsLoading(false);
     };
 
@@ -54,18 +64,15 @@ const AvailableQuestions = () => {
     <QuestionItems
       key={question.id}
       id={question.id}
-      name={question.name}
-      description={question.description}
-      price={question.price}
-      amount={1}
+      text={question.text}
+      onchange={changeHandler}
     />
   ));
   return (
-    <section className={classes.questions}>
-      <Card>
-        <ul>{questionList}</ul>
-      </Card>
-    </section>
+    <Card>
+      <ul className="answer">{questionList}</ul>
+      <HeaderCartButton onClick={props.onShowCart} />
+    </Card>
   );
 };
 export default AvailableQuestions;
