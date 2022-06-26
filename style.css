@@ -116,7 +116,7 @@ li label {
 }
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
@@ -147,4 +147,15 @@ form .error ul:before {
 h1 {
   color: #0c4a80;
   text-shadow: 0 4px 20px rgba(61, 158, 255, 0.363);
+}
+#results {
+  list-style: none;
+  padding: 10px;
+}
+.result {
+  text-decoration: none;
+  padding: 8px;
+}
+.total {
+  padding: 8px;
 }

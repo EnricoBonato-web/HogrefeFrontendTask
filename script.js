@@ -65,6 +65,22 @@ window.onload = function () {
 
     if (valid) modal.style.display = "flex";
     else modalError.style.display = "flex";
+    const formData = new FormData(document.querySelector("form"));
+    let total = 0;
+    const ul = document.getElementById("results");
+    ul.innerHTML = "";
+
+    for (var pair of formData.entries()) {
+      var li = document.createElement("li");
+      li.setAttribute("class", "result");
+      li.appendChild(document.createTextNode(pair[0] + ":  " + pair[1]));
+      ul.appendChild(li);
+      total += +pair[1];
+    }
+    var li = document.createElement("li");
+    li.setAttribute("class", "total");
+    li.appendChild(document.createTextNode("total" + ":  " + total));
+    ul.appendChild(li);
   };
   confirm.onclick = function (event) {
     form.submit();
