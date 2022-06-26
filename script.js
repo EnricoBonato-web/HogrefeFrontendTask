@@ -1,7 +1,9 @@
 const ERROR = "error";
-
+const QUESTION = "question";
+/*  Form Validation */
+/*      question validation  */
 const validateQuestion = (number) => {
-  var radios = document.getElementsByName("question" + number);
+  var radios = document.getElementsByName(QUESTION + number);
   var questionValid = false;
   var i = 0;
   while (!questionValid && i < radios.length) {
@@ -9,10 +11,11 @@ const validateQuestion = (number) => {
     i++;
   }
   if (!questionValid)
-    document.getElementById("question" + number).classList.add(ERROR);
+    document.getElementById(QUESTION + number).classList.add(ERROR);
   return questionValid;
 };
 
+/*      form validation  */
 const validateForm = () => {
   var formValid = true;
 
@@ -21,37 +24,36 @@ const validateForm = () => {
   }
   return formValid;
 };
+
+/* Error Clean Up */
+//      Single answer error handler
 const changeHandler = (number) => {
   return () => {
-    document.getElementById("question" + number).classList.remove(ERROR);
+    document.getElementById(QUESTION + number).classList.remove(ERROR);
   };
 };
+
 const addChange = () => {
   for (let i = 1; i <= 5; i++) {
     var radios = document.querySelectorAll(
-      'input[type=radio][name="question' + i + '"]'
+      'input[type=radio][name="' + QUESTION + i + '"]'
     );
     radios.forEach((radio) => {
       radio.addEventListener("change", changeHandler(i));
     });
   }
 };
+/*      Remove all error */
 const removeError = () => {
   for (let i = 1; i <= 5; i++) {
-    var radios = document
-      .getElementById("question" + i)
-      .classList.remove(ERROR);
+    var radios = document.getElementById(QUESTION + i).classList.remove(ERROR);
   }
 };
-var radios = document.querySelectorAll('input[type=radio][name="question1"]');
-radios.forEach((radio) => radio.addEventListener("change", changeHandler));
-
+/*   */
 window.onload = function () {
   const modal = document.getElementById("myModal");
   const modalError = document.getElementById("myModalError");
-
-  const btn = document.getElementById("submitBtn");
-
+  const submit = document.getElementById("submitBtn");
   const span = document.getElementsByClassName("close")[0];
   const spanError = document.getElementsByClassName("closeError")[0];
   const form = document.getElementById("form");
@@ -59,7 +61,9 @@ window.onload = function () {
   const confirm = document.getElementById("confirmBtn");
   const reset = document.getElementById("resetBtn");
 
-  btn.onclick = function (event) {
+  /*      Buttons clicks management */
+  /*        Submit      */
+  submit.onclick = function (event) {
     event.preventDefault();
     let valid = validateForm();
 
@@ -84,9 +88,15 @@ window.onload = function () {
     li.appendChild(document.createTextNode("total" + ": " + total));
     ul.appendChild(li);
   };
+
+  /*        Confirm      */
   confirm.onclick = function (event) {
+    //handling 
     form.submit();
   };
+
+  /*        Print CSV      */
+
   print.onclick = function (event) {
     event.preventDefault();
     const formData = new FormData(document.querySelector("form"));
@@ -120,12 +130,14 @@ window.onload = function () {
     window.URL.revokeObjectURL(url);
     anchor.remove();
   };
+  /*        Reset      */
   reset.onclick = (event) => {
     event.preventDefault();
     removeError();
     form.reset();
   };
 
+  /*        Modal Closing      */
   span.onclick = function () {
     modal.style.display = "none";
   };
