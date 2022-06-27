@@ -46,7 +46,7 @@ const addChange = () => {
 /*      Remove all error */
 const removeError = () => {
   for (let i = 1; i <= 5; i++) {
-    var radios = document.getElementById(QUESTION + i).classList.remove(ERROR);
+    document.getElementById(QUESTION + i).classList.remove(ERROR);
   }
 };
 /*   */
@@ -73,9 +73,9 @@ window.onload = function () {
     let total = 0;
     const ul = document.getElementById("results");
     ul.innerHTML = "";
-
+    let li;
     for (var pair of formData.entries()) {
-      var li = document.createElement("li");
+      li = document.createElement("li");
       li.setAttribute("class", "result");
       li.appendChild(
         document.createTextNode(pair[0] + ":    value " + pair[1])
@@ -83,15 +83,15 @@ window.onload = function () {
       ul.appendChild(li);
       total += +pair[1];
     }
-    var li = document.createElement("li");
+    li = document.createElement("li");
     li.setAttribute("class", "total");
     li.appendChild(document.createTextNode("total" + ": " + total));
     ul.appendChild(li);
   };
 
   /*        Confirm      */
-  confirm.onclick = function (event) {
-    //handling 
+  confirm.onclick = function () {
+    //handling
     form.submit();
   };
 
